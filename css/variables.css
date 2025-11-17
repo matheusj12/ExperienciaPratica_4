@@ -47,3 +47,11 @@
 .theme-auto { color-scheme: light dark; }
 .theme-dark { --bg: var(--dark-bg); --surface: var(--dark-surface); --text: var(--dark-text); }
 .theme-light { --bg: 255,255,255; --surface: 247,250,252; --text: 17,24,39; }
+.theme-contrast {
+  --bg-color: #000;
+  --text-color: #fff;
+  --primary-color: #00aaff;
+  --card-bg: #111;
+  --border-color: #444;
+}
+
