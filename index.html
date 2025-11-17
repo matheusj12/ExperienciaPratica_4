@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — Entrega III</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body class="theme-auto">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" aria-label="Barra lateral">
+    <div class="brand">
+      <button id="sidebarToggle" class="hamburger" aria-label="Alternar menu">☰</button>
+      <span class="brand-name">MyDash</span>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Principais">
+      <ul>
+        <li class="nav-item"><a href="#/">🏠 Dashboard</a></li>
+        <li class="nav-item"><a href="#/usuarios">👥 Usuários</a></li>
+        <li class="nav-item"><a href="#/config">⚙️ Configurações</a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="themeToggle" class="btn btn-ghost" aria-pressed="false">Alternar tema</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- HEADER -->
+    <header class="topbar" role="banner">
+      <div class="topbar-left">
+        <h1 class="page-title">Painel Operacional</h1>
+      </div>
+
+      <div class="topbar-right">
+        <div class="dropdown" id="userDropdown">
+          <button class="btn btn-sm" id="userBtn" aria-haspopup="true" aria-expanded="false">
+            Matheus ▾
+          </button>
+          <div class="dropdown-menu" role="menu" aria-hidden="true">
+            <a href="#" role="menuitem">Perfil</a>
+            <a href="#" role="menuitem">Notificações</a>
+            <a href="#" role="menuitem">Sair</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT (SPA muda aqui) -->
+    <main class="content" id="content" role="main">
+      <!-- Conteúdo carregado pela SPA -->
+    </main>
+
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <h2>Detalhes do item</h2>
+        <button id="closeModal" class="btn btn-icon" aria-label="Fechar">✕</button>
+      </header>
+      <div class="modal-body">
+        <p id="modalContent">Conteúdo do detalhe...</p>
+      </div>
+      <footer class="modal-footer">
+        <button id="modalClose" class="btn">Fechar</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- JS DA SUA SPA -->
+  <script src="js/templates.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
