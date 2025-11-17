@@ -1,7 +1,10 @@
-/* main.js - comportamento do dashboard */
+/* main.js - comportamento do dashboard - com acessibilidade WCAG AA */
+
+/* Seletores principais */
 const sidebar = document.getElementById('sidebar');
 const sidebarToggle = document.getElementById('sidebarToggle');
 const themeToggle = document.getElementById('themeToggle');
+const contrastToggle = document.getElementById('contrastToggle');
 const userBtn = document.getElementById('userBtn');
 const userDropdown = document.querySelector('#userDropdown .dropdown-menu');
 const toast = document.getElementById('toast');
@@ -9,7 +12,9 @@ const modal = document.getElementById('modal');
 const modalContent = document.getElementById('modalContent');
 const openSample = document.getElementById('openSample');
 
-/* Sidebar open/close (mobile) */
+/* --------------------------------------------
+   SIDEBAR RESPONSIVA
+---------------------------------------------*/
 sidebarToggle.addEventListener('click', ()=> {
   if (window.innerWidth <= 768) {
     sidebar.classList.toggle('open');
@@ -18,9 +23,18 @@ sidebarToggle.addEventListener('click', ()=> {
   }
 });
 
-/* Collapsible nav */
+/* Fecha sidebar ao clicar fora (mobile) */
+document.addEventListener('click', (e)=>{
+  if (window.innerWidth <= 768 && !sidebar.contains(e.target)) {
+    sidebar.classList.remove('open');
+  }
+});
+
+/* --------------------------------------------
+   MENU COLAPSÁVEL (ARIA)
+---------------------------------------------*/
 document.querySelectorAll('.nav-collapsible').forEach(btn=>{
-  btn.addEventListener('click', e=>{
+  btn.addEventListener('click', ()=>{
     const expanded = btn.getAttribute('aria-expanded') === 'true';
     btn.setAttribute('aria-expanded', String(!expanded));
     const sub = btn.nextElementSibling;
@@ -28,78 +42,101 @@ document.querySelectorAll('.nav-collapsible').forEach(btn=>{
   });
 });
 
-/* Dropdown user */
-userBtn.addEventListener('click', (e)=>{
+/* --------------------------------------------
+   DROPDOWN DE USUÁRIO (ARIA)
+---------------------------------------------*/
+userBtn.addEventListener('click', ()=>{
   const expanded = userBtn.getAttribute('aria-expanded') === 'true';
   userBtn.setAttribute('aria-expanded', String(!expanded));
-  const menu = userDropdown;
-  if (menu) {
-    const open = menu.style.display === 'block';
-    menu.style.display = open ? 'none' : 'block';
-    menu.setAttribute('aria-hidden', open ? 'true' : 'false');
-  }
+
+  const open = userDropdown.style.display === 'block';
+  userDropdown.style.display = open ? 'none' : 'block';
+  userDropdown.setAttribute('aria-hidden', open ? 'true' : 'false');
 });
 
-/* Theme toggle: cycles theme-light <-> theme-dark */
+/* --------------------------------------------
+   TEMA ESCURO / CLARO
+---------------------------------------------*/
 function setTheme(name){
   document.documentElement.classList.remove('theme-light','theme-dark','theme-auto');
   document.documentElement.classList.add(name);
-  // also set body class for components
-  document.body.className = name === 'theme-auto' ? 'theme-auto' : (name === 'theme-dark' ? 'theme-dark' : 'theme-light');
-  themeToggle.setAttribute('aria-pressed', name === 'theme-dark' ? 'true' : 'false');
+
+  document.body.className = name;
+  themeToggle.setAttribute('aria-pressed', name === 'theme-dark');
 }
+
 (function initTheme(){
-  // default: prefer system but toggle sets dark/light
   setTheme('theme-auto');
 })();
+
 themeToggle.addEventListener('click', ()=>{
-  const currentIsDark = document.body.classList.contains('theme-dark');
-  setTheme(currentIsDark ? 'theme-light' : 'theme-dark');
+  const isDark = document.body.classList.contains('theme-dark');
+  setTheme(isDark ? 'theme-light' : 'theme-dark');
 });
 
-/* Filter form -> show toast */
+/* --------------------------------------------
+   ALTO CONTRASTE (WCAG AA)
+---------------------------------------------*/
+if (contrastToggle) {
+  contrastToggle.addEventListener('click', ()=>{
+    document.body.classList.toggle('theme-contrast');
+    localStorage.setItem("contrastMode", document.body.classList.contains("theme-contrast"));
+  });
+}
+
+/* Restaurar contraste salvo */
+if (localStorage.getItem("contrastMode") === "true") {
+  document.body.classList.add("theme-contrast");
+}
+
+/* --------------------------------------------
+   FORM DE FILTRO → TOAST
+---------------------------------------------*/
 document.getElementById('filterForm').addEventListener('submit', (e)=>{
   e.preventDefault();
-  showToast('Filtro aplicado');
+  showToast('Filtro aplicado com sucesso!');
 });
 
-/* Toast helper */
+/* Função de toast */
 let toastTimer;
 function showToast(message = '') {
   toast.textContent = message;
   toast.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=> {
+
+  toastTimer = setTimeout(()=>{
     toast.classList.remove('show');
-  }, 2800);
+  }, 2500);
 }
 
-/* Modal interactions */
+/* --------------------------------------------
+   MODAL DE DETALHES
+---------------------------------------------*/
 function openModal(content){
   modalContent.textContent = content;
   modal.setAttribute('aria-hidden','false');
 }
+
 function closeModal(){
   modal.setAttribute('aria-hidden','true');
 }
+
 document.getElementById('closeModal').addEventListener('click', closeModal);
 document.getElementById('modalClose').addEventListener('click', closeModal);
-openSample.addEventListener('click', ()=> openModal('Exemplo de detalhe: usuário João — compra R$120, status Ativo.'));
 
-/* Table "Ver" buttons open modal */
+/* Botão de exemplo */
+openSample.addEventListener('click', ()=>{
+  openModal('Exemplo de detalhe: usuário João — compra R$120, status Ativo.');
+});
+
+/* Abrir modal ao clicar “Ver” */
 document.querySelectorAll('.open-detail').forEach(btn=>{
   btn.addEventListener('click', (e)=> {
     const row = e.target.closest('tr');
     const user = row.children[0].textContent;
     const val = row.children[1].textContent;
     const status = row.children[2].textContent;
+
     openModal(`Usuário: ${user}\nValor: ${val}\nStatus: ${status}`);
   });
-});
-
-/* Simple: close sidebar on outside click (mobile) */
-document.addEventListener('click', (e)=>{
-  if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !sidebar.classList.contains('collapsed')) {
-    sidebar.classList.remove('open');
-  }
 });

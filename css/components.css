@@ -1,60 +1,241 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: rgb(var(--color-primary));
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition);
+  font-size: var(--font-sm);
+}
 
-.btn { display:inline-flex; align-items:center; gap:8px; padding: 8px 12px; border-radius:8px; border: 1px solid transparent; background: rgb(var(--color-primary)); color: white; cursor:pointer; font-weight:600; transition: all var(--transition); font-size: var(--font-sm);}
 .btn:hover { transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
-.btn:disabled { opacity:0.5; cursor:not-allowed; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.btn-outline { background: transparent; color: rgb(var(--text)); border: 1px solid rgba(var(--neutral-200),1); }
-.btn-ghost { background: transparent; border:none; color: rgb(var(--text)); }
-
-.btn-sm { padding: 6px 10px; font-size: var(--font-sm); }
-
-/* Links as buttons */
-.btn-link { background:transparent; border:none; color: rgb(var(--color-primary)); cursor:pointer; }
-
-/* Forms */
-.filter-form { display:flex; gap: var(--space-2); align-items:end; flex-wrap:wrap; }
-.filter-form .form-row { display:flex; flex-direction:column; gap:6px; min-width:160px; }
-.filter-form input, .filter-form select {
-  padding: 8px 10px; border-radius:8px; border:1px solid rgba(var(--neutral-200),1);
-  background: rgba(var(--bg),1); color: rgb(var(--text));
+.btn-outline {
+  background: transparent;
+  color: rgb(var(--text));
+  border: 1px solid rgba(var(--neutral-200),1);
 }
-.actions { display:flex; gap:8px; align-items:center; }
 
-/* Metric card */
-.metric { text-align:left; }
-.metric-title { font-size: var(--font-sm); color: rgba(var(--neutral-500),1); margin-bottom:6px; }
-.metric-value { font-size: var(--font-xl); font-weight:700; margin-bottom:6px; }
-.metric-meta { font-size: var(--font-sm); color: rgba(var(--neutral-500),1); }
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: rgb(var(--text));
+}
 
-/* Badges */
-.badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size: var(--font-sm); font-weight:600; }
-.badge-active { background: rgba(var(--color-success),0.12); color: rgb(var(--color-success)); border: 1px solid rgba(var(--color-success),0.18); }
-.badge-pending { background: rgba(var(--color-warning),0.08); color: rgb(var(--color-warning)); border: 1px solid rgba(var(--color-warning),0.14); }
-.badge-critical { background: rgba(var(--color-danger),0.08); color: rgb(var(--color-danger)); border: 1px solid rgba(var(--color-danger),0.14); }
+.btn-sm {
+  padding: 6px 10px;
+  font-size: var(--font-sm);
+}
 
-/* Table */
-.table { width:100%; border-collapse:collapse; font-size: var(--font-sm); }
-.table thead th { text-align:left; padding:10px; border-bottom:1px solid rgba(var(--neutral-200),0.6); color: rgba(var(--neutral-700),1); }
-.table tbody td { padding:10px; border-bottom:1px solid rgba(var(--neutral-200),0.05); }
+.btn-link {
+  background: transparent;
+  border: none;
+  color: rgb(var(--color-primary));
+  cursor: pointer;
+}
 
-/* Activity list */
-.activity-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
-.activity-list li { display:flex; gap:8px; align-items:center; }
+/* --------------------------------------
+   FORMULÁRIOS
+--------------------------------------- */
+.filter-form {
+  display: flex;
+  gap: var(--space-2);
+  align-items: end;
+  flex-wrap: wrap;
+}
 
-/* Mini chart styling */
-.mini-chart { width:100%; height:120px; stroke: rgba(var(--color-primary),0.9); stroke-width:1.4; fill:none; }
-.mini-chart polyline { stroke-linecap: round; stroke-linejoin: round; }
+.filter-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 160px;
+}
 
-/* Dropdown */
+.filter-form input,
+.filter-form select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(var(--neutral-200),1);
+  background: rgba(var(--bg),1);
+  color: rgb(var(--text));
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* --------------------------------------
+   MÉTRICAS
+--------------------------------------- */
+.metric { text-align: left; }
+
+.metric-title {
+  font-size: var(--font-sm);
+  color: rgba(var(--neutral-500),1);
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.metric-meta {
+  font-size: var(--font-sm);
+  color: rgba(var(--neutral-500),1);
+}
+
+/* --------------------------------------
+   BADGES
+--------------------------------------- */
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+.badge-active {
+  background: rgba(var(--color-success),0.12);
+  color: rgb(var(--color-success));
+  border: 1px solid rgba(var(--color-success),0.18);
+}
+
+.badge-pending {
+  background: rgba(var(--color-warning),0.08);
+  color: rgb(var(--color-warning));
+  border: 1px solid rgba(var(--color-warning),0.14);
+}
+
+.badge-critical {
+  background: rgba(var(--color-danger),0.08);
+  color: rgb(var(--color-danger));
+  border: 1px solid rgba(var(--color-danger),0.14);
+}
+
+/* --------------------------------------
+   TABELA
+--------------------------------------- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-sm);
+}
+
+.table thead th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgba(var(--neutral-200),0.6);
+  color: rgba(var(--neutral-700),1);
+}
+
+.table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(var(--neutral-200),0.05);
+}
+
+/* --------------------------------------
+   LISTA DE ATIVIDADES
+--------------------------------------- */
+.activity-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.activity-list li {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* --------------------------------------
+   MINI CHART
+--------------------------------------- */
+.mini-chart {
+  width: 100%;
+  height: 120px;
+  stroke: rgba(var(--color-primary),0.9);
+  stroke-width: 1.4;
+  fill: none;
+}
+
+.mini-chart polyline {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --------------------------------------
+   DROPDOWN
+--------------------------------------- */
 .dropdown { position: relative; }
-.dropdown-menu {
-  position:absolute; right:0; top:110%;
-  background: rgba(var(--surface),1); border-radius:8px; padding:8px; min-width:160px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08); display:none;
-}
-.dropdown-menu a { display:block; padding:8px; text-decoration:none; color: rgb(var(--text)); border-radius:6px; }
-.dropdown-menu a:hover { background: rgba(var(--neutral-200),0.6); }
 
-/* Accessibility focus */
-:focus { outline: 3px solid rgba(var(--color-primary),0.12); outline-offset:2px; }
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background: rgba(var(--surface),1);
+  border-radius: 8px;
+  padding: 8px;
+  min-width: 160px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  display: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px;
+  text-decoration: none;
+  color: rgb(var(--text));
+  border-radius: 6px;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(var(--neutral-200),0.6);
+}
+
+/* --------------------------------------
+   FOCO (ACESSIBILIDADE WCAG 2.1 AA)
+--------------------------------------- */
+:focus {
+  outline: 3px solid #0056ff !important;
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* --------------------------------------
+   TEMA DE ALTO CONTRASTE (WCAG AA)
+--------------------------------------- */
+.theme-contrast {
+  --bg: 0, 0, 0;
+  --text: 255, 255, 255;
+  --surface: 25, 25, 25;
+  --border: 120, 120, 120;
+  --color-primary: 80, 180, 255;
+}
+
+body.theme-contrast {
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+}
+
+.theme-contrast .card {
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--border));
+}
+
+.theme-contrast .btn {
+  background: rgb(var(--color-primary));
+}
